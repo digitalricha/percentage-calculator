@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5653816698002015"
+     crossorigin="anonymous"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-btn:hover {
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button.calculate {
+            flex: 1;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button.calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        button.calculate:active {
+            transform: translateY(0);
+        }
+
+        button.reset {
+            padding: 14px 20px;
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button.reset:hover {
+            background: #efefef;
+            border-color: #999;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+            word-break: break-word;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #27ae60;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function PercentageCalculator() {
+            const [activeTab, setActiveTab] = React.useState('percentage');
+            const [tab1Inputs, setTab1Inputs] = React.useState({ amount: '', percentage: '' });
+            const [tab2Inputs, setTab2Inputs] = React.useState({ part: '', whole: '' });
+            const [tab3Inputs, setTab3Inputs] = React.useState({ original: '', new: '' });
+            const [tab4Inputs, setTab4Inputs] = React.useState({ price: '', discount: '' });
+            const [result, setResult] = React.useState(null);
+            const [error, setError] = React.useState('');
+
+            const validateNumber = (value) => {
+                const num = parseFloat(value);
+                return !isNaN(num) && num !== '';
+            };
+
+            const handleInputChange = (e, inputKey, tabInputs, setTabInputs) => {
+                const { value } = e.target;
+                setTabInputs({ ...tabInputs, [inputKey]: value });
+                setError('');
+            };
+
+            const handleCalculate = () => {
+                setError('');
+                setResult(null);
+
+                try {
+                    if (activeTab === 'percentage') {
+                        const { amount, percentage } = tab1Inputs;
+                        if (!validateNumber(amount) || !validateNumber(percentage)) {
+                            setError('Please enter valid numbers');
+                            return;
+                        }
+                        const result = (parseFloat(amount) * parseFloat(percentage)) / 100;
+                        setResult({
+                            label: `${percentage}% of ${amount}`,
+                            value: result.toFixed(2)
+                        });
+                    } else if (activeTab === 'percentOf') {
+                        const { part, whole } = tab2Inputs;
+                        if (!validateNumber(part) || !validateNumber(whole)) {
+                            setError('Please enter valid numbers');
+                            return;
+                        }
+                        if (parseFloat(whole) === 0) {
+                            setError('Whole number cannot be zero');
+                            return;
+                        }
+                        const result = (parseFloat(part) / parseFloat(whole)) * 100;
+                        setResult({
+                            label: `${part} is what % of ${whole}`,
+                            value: result.toFixed(2) + '%'
+                        });
+                    } else if (activeTab === 'change') {
+                        const { original, new: newVal } = tab3Inputs;
+                        if (!validateNumber(original) || !validateNumber(newVal)) {
+                            setError('Please enter valid numbers');
+                            return;
+                        }
+                        if (parseFloat(original) === 0) {
+                            setError('Original number cannot be zero');
+                            return;
+                        }
+                        const change = ((parseFloat(newVal) - parseFloat(original)) / parseFloat(original)) * 100;
+                        const changeType = change > 0 ? 'Increase' : 'Decrease';
+                        setResult({
+                            label: `${changeType} from ${original} to ${newVal}`,
+                            value: Math.abs(change).toFixed(2) + '%'
+                        });
+                    } else if (activeTab === 'discount') {
+                        const { price, discount } = tab4Inputs;
+                        if (!validateNumber(price) || !validateNumber(discount)) {
+                            setError('Please enter valid numbers');
+                            return;
+                        }
+                        const discountAmount = (parseFloat(price) * parseFloat(discount)) / 100;
+                        const finalPrice = parseFloat(price) - discountAmount;
+                        setResult({
+                            label: `${discount}% discount on ${price}`,
+                            value: finalPrice.toFixed(2)
+                        });
+                    }
+                } catch (err) {
+                    setError('Calculation error. Please check your inputs.');
+                }
+            };
+
+            const handleReset = () => {
+                if (activeTab === 'percentage') setTab1Inputs({ amount: '', percentage: '' });
+                else if (activeTab === 'percentOf') setTab2Inputs({ part: '', whole: '' });
+                else if (activeTab === 'change') setTab3Inputs({ original: '', new: '' });
+                else if (activeTab === 'discount') setTab4Inputs({ price: '', discount: '' });
+                setResult(null);
+                setError('');
+            };
+
+            return (
+                <div className="container">
+                    <h1>📊 Percentage Calculator</h1>
+                    <p className="subtitle">Fast & Accurate Calculations</p>
+
+                    <div className="tabs">
+                        <button 
+                            className={`tab-btn ${activeTab === 'percentage' ? 'active' : ''}`}
+                            onClick={() => { setActiveTab('percentage'); handleReset(); }}
+                        >
+                            % Of
+                        </button>
+                        <button 
+                            className={`tab-btn ${activeTab === 'percentOf' ? 'active' : ''}`}
+                            onClick={() => { setActiveTab('percentOf'); handleReset(); }}
+                        >
+                            What %
+                        </button>
+                        <button 
+                            className={`tab-btn ${activeTab === 'change' ? 'active' : ''}`}
+                            onClick={() => { setActiveTab('change'); handleReset(); }}
+                        >
+                            Change
+                        </button>
+                        <button 
+                            className={`tab-btn ${activeTab === 'discount' ? 'active' : ''}`}
+                            onClick={() => { setActiveTab('discount'); handleReset(); }}
+                        >
+                            Discount
+                        </button>
+                    </div>
+
+                    {activeTab === 'percentage' && (
+                        <div>
+                            <div className="form-group">
+                                <label>Amount</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter amount (e.g., 1000)"
+                                    value={tab1Inputs.amount}
+                                    onChange={(e) => handleInputChange(e, 'amount', tab1Inputs, setTab1Inputs)}
+                                />
+                                <p className="info-text">The base amount</p>
+                            </div>
+                            <div className="form-group">
+                                <label>Percentage (%)</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter percentage (e.g., 20)"
+                                    value={tab1Inputs.percentage}
+                                    onChange={(e) => handleInputChange(e, 'percentage', tab1Inputs, setTab1Inputs)}
+                                />
+                                <p className="info-text">The percentage to calculate</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'percentOf' && (
+                        <div>
+                            <div className="form-group">
+                                <label>Part</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter part (e.g., 250)"
+                                    value={tab2Inputs.part}
+                                    onChange={(e) => handleInputChange(e, 'part', tab2Inputs, setTab2Inputs)}
+                                />
+                                <p className="info-text">The smaller value</p>
+                            </div>
+                            <div className="form-group">
+                                <label>Whole</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter whole (e.g., 1000)"
+                                    value={tab2Inputs.whole}
+                                    onChange={(e) => handleInputChange(e, 'whole', tab2Inputs, setTab2Inputs)}
+                                />
+                                <p className="info-text">The total value</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'change' && (
+                        <div>
+                            <div className="form-group">
+                                <label>Original Value</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter original (e.g., 100)"
+                                    value={tab3Inputs.original}
+                                    onChange={(e) => handleInputChange(e, 'original', tab3Inputs, setTab3Inputs)}
+                                />
+                                <p className="info-text">Starting value</p>
+                            </div>
+                            <div className="form-group">
+                                <label>New Value</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter new (e.g., 150)"
+                                    value={tab3Inputs.new}
+                                    onChange={(e) => handleInputChange(e, 'new', tab3Inputs, setTab3Inputs)}
+                                />
+                                <p className="info-text">Ending value</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'discount' && (
+                        <div>
+                            <div className="form-group">
+                                <label>Original Price</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter price (e.g., 99.99)"
+                                    value={tab4Inputs.price}
+                                    onChange={(e) => handleInputChange(e, 'price', tab4Inputs, setTab4Inputs)}
+                                />
+                                <p className="info-text">Price before discount</p>
+                            </div>
+                            <div className="form-group">
+                                <label>Discount (%)</label>
+                                <input 
+                                    type="number" 
+                                    placeholder="Enter discount (e.g., 20)"
+                                    value={tab4Inputs.discount}
+                                    onChange={(e) => handleInputChange(e, 'discount', tab4Inputs, setTab4Inputs)}
+                                />
+                                <p className="info-text">Discount percentage</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {error && <p className="error">⚠️ {error}</p>}
+
+                    <div className="btn-group">
+                        <button className="calculate" onClick={handleCalculate}>Calculate</button>
+                        <button className="reset" onClick={handleReset}>Reset</button>
+                    </div>
+
+                    {result && (
+                        <div className="result">
+                            <div className="result-label">{result.label}</div>
+                            <div className="result-value">{result.value}</div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<PercentageCalculator />);
+    </script>
+</body>
+</html>
