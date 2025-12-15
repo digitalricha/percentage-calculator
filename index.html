@@ -3,86 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Percentage Calculator</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <title>Free Analytics Tools - Percentage Calculator & Google Shopping Ads Performance Optimiser</title>
+    <meta name="description" content="Use our free Analytics tools to review the performance of your Google Ads Shopping Ads, budget estimator or percentage calculator. Privacy and AI safe">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="noodp">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5653816698002015"
+        crossorigin="anonymous"></script>
+    <style>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-W4B8PS26');</script>
-<!-- End Google Tag Manager -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
+<!-- End Google Tag Manager --> 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #1f2937;
+            --light-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
-        .container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-title {
             font-size: 28px;
-            text-align: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .tabs {
+        /* Navigation Buttons */
+        .nav-buttons {
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
+            flex-wrap: wrap;
         }
 
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: none;
-            color: #999;
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
+            font-weight: 600;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
         }
 
-        .tab-btn:hover {
-            color: #667eea;
+        .nav-btn.active {
+            background: white;
+            color: var(--primary-color);
+            border-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
@@ -90,372 +138,1204 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--text-primary);
             font-size: 14px;
         }
 
-        input {
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             font-size: 14px;
-            transition: border-color 0.3s ease;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        input:focus {
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .input-row {
+        /* Buttons */
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Cards & Sections */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Two Column Layout */
+        .two-col {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
-        button.calculate {
-            flex: 1;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
         }
 
-        button.calculate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        button.calculate:active {
-            transform: translateY(0);
-        }
-
-        button.reset {
-            padding: 14px 20px;
-            background: #f5f5f5;
-            color: #333;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        button.reset:hover {
-            background: #efefef;
-            border-color: #999;
-        }
-
-        .result {
-            margin-top: 30px;
+        .result-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e9ff 100%);
             padding: 20px;
-            background: #f9f9f9;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary-color);
+            text-align: center;
         }
 
         .result-label {
-            color: #666;
-            font-size: 13px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .result-value {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            color: #667eea;
-            word-break: break-word;
+            color: var(--primary-color);
         }
 
-        .error {
-            color: #e74c3c;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .success {
-            color: #27ae60;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .info-text {
+        .result-delta {
             font-size: 12px;
-            color: #999;
+            color: var(--success-color);
             margin-top: 8px;
-            font-style: italic;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background: var(--light-bg);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background: var(--light-bg);
+        }
+
+        /* AdSense Section */
+        .adsense-section {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .adsense-placeholder {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Success/Error Messages */
+        .alert {
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #7f1d1d;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #0c2d6b;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        .spinner.show {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-    <!-- Google Tag Manager (noscript) -->
+   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4B8PS26"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) --> 
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-title">📊 Analytics Tools</div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="switchPage('calculator')">
+                    <span>🧮</span> Percentage Calculator
+                </button>
+                <button class="nav-btn" onclick="switchPage('optimizer')">
+                    <span>🛍️</span> Google Shopping Ads Performance Optimiser
+                </button>
+            </div>
+        </div>
+    </header>
 
-    <script type="text/babel">
-        function PercentageCalculator() {
-            const [activeTab, setActiveTab] = React.useState('percentage');
-            const [tab1Inputs, setTab1Inputs] = React.useState({ amount: '', percentage: '' });
-            const [tab2Inputs, setTab2Inputs] = React.useState({ part: '', whole: '' });
-            const [tab3Inputs, setTab3Inputs] = React.useState({ original: '', new: '' });
-            const [tab4Inputs, setTab4Inputs] = React.useState({ price: '', discount: '' });
-            const [result, setResult] = React.useState(null);
-            const [error, setError] = React.useState('');
+    <!-- Main Container -->
+    <div class="container">
+        <!-- AdSense Section (Visible on All Pages) -->
+        <div class="adsense-section">
+            <div class="adsense-placeholder">
+                📺 AdSense/Advertisement Space<br>
+                <small>Your ads display here</small>
+            </div>
+        </div>
 
-            const validateNumber = (value) => {
-                const num = parseFloat(value);
-                return !isNaN(num) && num !== '';
-            };
-
-            const handleInputChange = (e, inputKey, tabInputs, setTabInputs) => {
-                const { value } = e.target;
-                setTabInputs({ ...tabInputs, [inputKey]: value });
-                setError('');
-            };
-
-            const handleCalculate = () => {
-                setError('');
-                setResult(null);
-
-                try {
-                    if (activeTab === 'percentage') {
-                        const { amount, percentage } = tab1Inputs;
-                        if (!validateNumber(amount) || !validateNumber(percentage)) {
-                            setError('Please enter valid numbers');
-                            return;
-                        }
-                        const result = (parseFloat(amount) * parseFloat(percentage)) / 100;
-                        setResult({
-                            label: `${percentage}% of ${amount}`,
-                            value: result.toFixed(2)
-                        });
-                    } else if (activeTab === 'percentOf') {
-                        const { part, whole } = tab2Inputs;
-                        if (!validateNumber(part) || !validateNumber(whole)) {
-                            setError('Please enter valid numbers');
-                            return;
-                        }
-                        if (parseFloat(whole) === 0) {
-                            setError('Whole number cannot be zero');
-                            return;
-                        }
-                        const result = (parseFloat(part) / parseFloat(whole)) * 100;
-                        setResult({
-                            label: `${part} is what % of ${whole}`,
-                            value: result.toFixed(2) + '%'
-                        });
-                    } else if (activeTab === 'change') {
-                        const { original, new: newVal } = tab3Inputs;
-                        if (!validateNumber(original) || !validateNumber(newVal)) {
-                            setError('Please enter valid numbers');
-                            return;
-                        }
-                        if (parseFloat(original) === 0) {
-                            setError('Original number cannot be zero');
-                            return;
-                        }
-                        const change = ((parseFloat(newVal) - parseFloat(original)) / parseFloat(original)) * 100;
-                        const changeType = change > 0 ? 'Increase' : 'Decrease';
-                        setResult({
-                            label: `${changeType} from ${original} to ${newVal}`,
-                            value: Math.abs(change).toFixed(2) + '%'
-                        });
-                    } else if (activeTab === 'discount') {
-                        const { price, discount } = tab4Inputs;
-                        if (!validateNumber(price) || !validateNumber(discount)) {
-                            setError('Please enter valid numbers');
-                            return;
-                        }
-                        const discountAmount = (parseFloat(price) * parseFloat(discount)) / 100;
-                        const finalPrice = parseFloat(price) - discountAmount;
-                        setResult({
-                            label: `${discount}% discount on ${price}`,
-                            value: finalPrice.toFixed(2)
-                        });
-                    }
-                } catch (err) {
-                    setError('Calculation error. Please check your inputs.');
-                }
-            };
-
-            const handleReset = () => {
-                if (activeTab === 'percentage') setTab1Inputs({ amount: '', percentage: '' });
-                else if (activeTab === 'percentOf') setTab2Inputs({ part: '', whole: '' });
-                else if (activeTab === 'change') setTab3Inputs({ original: '', new: '' });
-                else if (activeTab === 'discount') setTab4Inputs({ price: '', discount: '' });
-                setResult(null);
-                setError('');
-            };
-
-            return (
-                <div className="container">
-                    <h1>📊 Percentage Calculator</h1>
-                    <p className="subtitle">Fast & Accurate Calculations</p>
-
-                    <div className="tabs">
-                        <button 
-                            className={`tab-btn ${activeTab === 'percentage' ? 'active' : ''}`}
-                            onClick={() => { setActiveTab('percentage'); handleReset(); }}
-                        >
-                            % Of
-                        </button>
-                        <button 
-                            className={`tab-btn ${activeTab === 'percentOf' ? 'active' : ''}`}
-                            onClick={() => { setActiveTab('percentOf'); handleReset(); }}
-                        >
-                            What %
-                        </button>
-                        <button 
-                            className={`tab-btn ${activeTab === 'change' ? 'active' : ''}`}
-                            onClick={() => { setActiveTab('change'); handleReset(); }}
-                        >
-                            Change
-                        </button>
-                        <button 
-                            className={`tab-btn ${activeTab === 'discount' ? 'active' : ''}`}
-                            onClick={() => { setActiveTab('discount'); handleReset(); }}
-                        >
-                            Discount
-                        </button>
+        <!-- Page 1: Percentage Calculator -->
+        <div id="calculator" class="page active">
+            <div class="card">
+                <div class="card-title">🧮 Percentage Calculator</div>
+                <div class="two-col">
+                    <!-- Calculate Percentage -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 16px;">Calculate What is % of</h3>
+                        <div class="form-group">
+                            <label>What is</label>
+                            <input type="number" id="calc1_num1" placeholder="Enter number" value="20">
+                        </div>
+                        <div class="form-group">
+                            <label>% of</label>
+                            <input type="number" id="calc1_num2" placeholder="Enter total" value="100">
+                        </div>
+                        <button class="btn-primary" onclick="calculatePercentage()">Calculate</button>
+                        <div id="calc1_result"></div>
                     </div>
 
-                    {activeTab === 'percentage' && (
-                        <div>
-                            <div className="form-group">
-                                <label>Amount</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter amount (e.g., 1000)"
-                                    value={tab1Inputs.amount}
-                                    onChange={(e) => handleInputChange(e, 'amount', tab1Inputs, setTab1Inputs)}
-                                />
-                                <p className="info-text">The base amount</p>
-                            </div>
-                            <div className="form-group">
-                                <label>Percentage (%)</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter percentage (e.g., 20)"
-                                    value={tab1Inputs.percentage}
-                                    onChange={(e) => handleInputChange(e, 'percentage', tab1Inputs, setTab1Inputs)}
-                                />
-                                <p className="info-text">The percentage to calculate</p>
-                            </div>
+                    <!-- Percentage of Value -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 16px;">Calculate % of a Number</h3>
+                        <div class="form-group">
+                            <label>What is</label>
+                            <input type="number" id="calc2_percent" placeholder="Enter percentage" value="25">
                         </div>
-                    )}
-
-                    {activeTab === 'percentOf' && (
-                        <div>
-                            <div className="form-group">
-                                <label>Part</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter part (e.g., 250)"
-                                    value={tab2Inputs.part}
-                                    onChange={(e) => handleInputChange(e, 'part', tab2Inputs, setTab2Inputs)}
-                                />
-                                <p className="info-text">The smaller value</p>
-                            </div>
-                            <div className="form-group">
-                                <label>Whole</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter whole (e.g., 1000)"
-                                    value={tab2Inputs.whole}
-                                    onChange={(e) => handleInputChange(e, 'whole', tab2Inputs, setTab2Inputs)}
-                                />
-                                <p className="info-text">The total value</p>
-                            </div>
+                        <div class="form-group">
+                            <label>% of</label>
+                            <input type="number" id="calc2_num" placeholder="Enter number" value="200">
                         </div>
-                    )}
-
-                    {activeTab === 'change' && (
-                        <div>
-                            <div className="form-group">
-                                <label>Original Value</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter original (e.g., 100)"
-                                    value={tab3Inputs.original}
-                                    onChange={(e) => handleInputChange(e, 'original', tab3Inputs, setTab3Inputs)}
-                                />
-                                <p className="info-text">Starting value</p>
-                            </div>
-                            <div className="form-group">
-                                <label>New Value</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter new (e.g., 150)"
-                                    value={tab3Inputs.new}
-                                    onChange={(e) => handleInputChange(e, 'new', tab3Inputs, setTab3Inputs)}
-                                />
-                                <p className="info-text">Ending value</p>
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'discount' && (
-                        <div>
-                            <div className="form-group">
-                                <label>Original Price</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter price (e.g., 99.99)"
-                                    value={tab4Inputs.price}
-                                    onChange={(e) => handleInputChange(e, 'price', tab4Inputs, setTab4Inputs)}
-                                />
-                                <p className="info-text">Price before discount</p>
-                            </div>
-                            <div className="form-group">
-                                <label>Discount (%)</label>
-                                <input 
-                                    type="number" 
-                                    placeholder="Enter discount (e.g., 20)"
-                                    value={tab4Inputs.discount}
-                                    onChange={(e) => handleInputChange(e, 'discount', tab4Inputs, setTab4Inputs)}
-                                />
-                                <p className="info-text">Discount percentage</p>
-                            </div>
-                        </div>
-                    )}
-
-                    {error && <p className="error">⚠️ {error}</p>}
-
-                    <div className="btn-group">
-                        <button className="calculate" onClick={handleCalculate}>Calculate</button>
-                        <button className="reset" onClick={handleReset}>Reset</button>
+                        <button class="btn-primary" onclick="calculatePercentageOfValue()">Calculate</button>
+                        <div id="calc2_result"></div>
                     </div>
-
-                    {result && (
-                        <div className="result">
-                            <div className="result-label">{result.label}</div>
-                            <div className="result-value">{result.value}</div>
-                        </div>
-                    )}
                 </div>
-            );
+
+                <div class="two-col" style="margin-top: 30px;">
+                    <!-- Percentage Increase/Decrease -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 16px;">Percentage Increase/Decrease</h3>
+                        <div class="form-group">
+                            <label>Original Value</label>
+                            <input type="number" id="calc3_original" placeholder="Enter original" value="100">
+                        </div>
+                        <div class="form-group">
+                            <label>New Value</label>
+                            <input type="number" id="calc3_new" placeholder="Enter new value" value="150">
+                        </div>
+                        <button class="btn-primary" onclick="calculatePercentageChange()">Calculate</button>
+                        <div id="calc3_result"></div>
+                    </div>
+
+                    <!-- Reverse Percentage -->
+                    <div>
+                        <h3 style="margin-bottom: 15px; font-size: 16px;">Reverse Percentage (Find Original)</h3>
+                        <div class="form-group">
+                            <label>Percentage</label>
+                            <input type="number" id="calc4_percent" placeholder="Enter percentage" value="20">
+                        </div>
+                        <div class="form-group">
+                            <label>Final Value</label>
+                            <input type="number" id="calc4_final" placeholder="Enter final value" value="120">
+                        </div>
+                        <button class="btn-primary" onclick="calculateReversePercentage()">Calculate</button>
+                        <div id="calc4_result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Google Shopping Ads Optimizer -->
+        <div id="optimizer" class="page">
+            <div class="card">
+                <div class="card-title">🛍️ Google Shopping Ads Performance Optimiser</div>
+                
+                <!-- CSV Upload Section -->
+                <h3 style="margin: 30px 0 15px; font-size: 18px; font-weight: 600;">📂 Data Upload</h3>
+                <div class="form-group">
+                    <label>Upload Google Shopping Ads Data fom Google Ads Account in CSV Format</label>
+                    <input type="file" id="csvFile" accept=".csv" onchange="loadCSVData()">
+                    <small style="color: var(--text-secondary); display: block; margin-top: 8px;">Upload your Google Shopping CSV export with columns: Campaign, Product Title, Category, Impressions, Clicks, Cost, Conversions, Conv. value, CTR, Conv. rate, All Conv. value/Cost </small>
+                </div>
+
+                <div id="uploadStatus"></div>
+
+                <!-- Model Selection -->
+                <h3 style="margin: 30px 0 15px; font-size: 18px; font-weight: 600;">⚙️ Forecasting Model</h3>
+                <div class="form-group">
+                    <label>Select Forecasting Model</label>
+                    <select id="modelSelect" onchange="updateModelInfo()">
+                        <option value="conservative">🛡️ Conservative (Risk-averse, 55-75% efficiency)</option>
+                        <option value="moderate" selected>⚖️ Moderate (Balanced, 65-88% efficiency)</option>
+                        <option value="aggressive">🚀 Aggressive (Optimistic, 75-95% efficiency)</option>
+                        <option value="ml">🤖 ML-Inspired (Adaptive, 55-100% efficiency)</option>
+                        <option value="linear">📏 Linear Extrapolation (Baseline, constant ROAS)</option>
+                    </select>
+                </div>
+
+                <div id="modelInfo" class="alert alert-info" style="display: none;">
+                    <span id="modelDescription"></span>
+                </div>
+
+                <!-- Budget Input Section -->
+                <h3 style="margin: 30px 0 15px; font-size: 18px; font-weight: 600;">Budget Input</h3>
+                
+                <div id="csvSection" style="display: none;">
+                    <h4 style="margin: 20px 0 15px; font-size: 16px; font-weight: 600;">📊 Campaign Budget Analysis</h4>
+                    <div class="form-group">
+                        <label>Proposed Daily Budget ($)</label>
+                        <input type="number" id="proposedDailyBudget" placeholder="Enter proposed daily budget" value="500" min="0" step="10">
+                    </div>
+                    <button class="btn-success" onclick="calculateCampaignEstimates()">📊 Calculate Campaign Estimates</button>
+                    <div id="campaignResults" style="display: none; margin-top: 30px;"></div>
+
+                    <h4 style="margin: 40px 0 15px; font-size: 16px; font-weight: 600;">🏷️ Category-Based Budget Allocation</h4>
+                    <div id="categoryBudgetInputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"></div>
+                    <button class="btn-success" onclick="calculateCategoryEstimates()" style="margin-top: 20px;">📊 Calculate Category Estimates</button>
+                    <div id="categoryResults" style="display: none; margin-top: 30px;"></div>
+
+                    <h4 style="margin: 40px 0 15px; font-size: 16px; font-weight: 600;">📈 Product Performance Clustering</h4>
+                    <div id="productClustering" style="display: none; margin-top: 20px;"></div>
+                </div>
+
+                <div id="manualSection">
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">⬆️ Upload a CSV file to analyze campaigns and categories, or use manual input below:</p>
+                    <div class="two-col">
+                        <div class="form-group">
+                            <label>Current Total Budget ($)</label>
+                            <input type="number" id="currentBudget" placeholder="Enter current budget" value="5000" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Conversion Value ($)</label>
+                            <input type="number" id="currentConvValue" placeholder="Enter conversion value" value="7500" min="0" step="100">
+                        </div>
+                    </div>
+
+                    <div class="two-col">
+                        <div class="form-group">
+                            <label>Proposed New Budget ($)</label>
+                            <input type="number" id="newBudget" placeholder="Enter new budget" value="6500" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Days (for daily breakdown)</label>
+                            <input type="number" id="numDays" placeholder="Enter number of days" value="30" min="1" step="1">
+                        </div>
+                    </div>
+
+                    <button class="btn-success" onclick="calculateOptimizerResults()">📊 Calculate Performance Estimates</button>
+                </div>
+
+                <div id="optimizerResults" style="display: none;">
+                    <h3 style="margin: 30px 0 20px; font-size: 18px; font-weight: 600;">Estimated Results</h3>
+                    
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Current ROAS</div>
+                            <div class="result-value" id="currentROAS">1.50</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">Expected ROAS</div>
+                            <div class="result-value" id="expectedROAS">1.50</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">Current Daily Budget</div>
+                            <div class="result-value" id="currentDaily">$167</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">New Daily Budget</div>
+                            <div class="result-value" id="newDaily">$217</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">Expected Conv Value</div>
+                            <div class="result-value" id="expectedValue">$9,750</div>
+                            <div class="result-delta" id="valueDelta">+$2,250</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">Value Lift</div>
+                            <div class="result-value" id="valueLift">30.0%</div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 30px 0 20px; font-size: 18px; font-weight: 600;">Detailed Comparison</h3>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Current</th>
+                                <th>Expected</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Total Budget</strong></td>
+                                <td id="table_currBudget">$5,000</td>
+                                <td id="table_newBudget">$6,500</td>
+                                <td id="table_budgetChange">+$1,500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Daily Budget</strong></td>
+                                <td id="table_currDaily">$167</td>
+                                <td id="table_newDaily">$217</td>
+                                <td id="table_dailyChange">+$50</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conversion Value</strong></td>
+                                <td id="table_currValue">$7,500</td>
+                                <td id="table_expectedValue">$9,750</td>
+                                <td id="table_valueChange">+$2,250</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ROAS</strong></td>
+                                <td id="table_currROAS">1.50x</td>
+                                <td id="table_expectedROAS">1.50x</td>
+                                <td id="table_roasChange">0.00x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div id="chartContainer" style="margin: 30px 0; display: none;">
+                        <h3 style="margin: 20px 0 15px; font-size: 18px; font-weight: 600;">📊 Visual Comparison</h3>
+                        <canvas id="comparisonChart" height="80"></canvas>
+                    </div>
+
+                    <div class="alert alert-success">
+                        ✅ Analysis complete! Use these estimates to inform your budget allocation decisions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Analytics Tools | Percentage Calculator &  Google Shopping Ads Performance Optimiser</p>
+            <p style="font-size: 12px; color: #9ca3af; margin-top: 10px;">Built with HTML, CSS & JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
+    
+    <script>
+        // Global variables
+        let csvData = null;
+        let campaignData = {};
+        let categoryData = {};
+
+        // ========== PAGE NAVIGATION ==========
+        function switchPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.closest('.nav-btn').classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<PercentageCalculator />);
+        // ========== CSV DATA LOADING ==========
+        function loadCSVData() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const csvContent = e.target.result;
+                Papa.parse(csvContent, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        csvData = results.data;
+                        processCSVData();
+                        
+                        const statusDiv = document.getElementById('uploadStatus');
+                        statusDiv.innerHTML = `
+                            <div class="alert alert-success">
+                                ✅ Loaded ${csvData.length} records from CSV
+                            </div>
+                        `;
+                        
+                        document.getElementById('csvSection').style.display = 'block';
+                        document.getElementById('manualSection').style.display = 'none';
+                    },
+                    error: function(error) {
+                        const statusDiv = document.getElementById('uploadStatus');
+                        statusDiv.innerHTML = `
+                            <div class="alert alert-error">
+                                ❌ Error loading CSV: ${error.message}
+                            </div>
+                        `;
+                    }
+                });
+            };
+            reader.readAsText(file);
+        }
+
+        // ========== PROCESS CSV DATA ==========
+        function processCSVData() {
+            campaignData = {};
+            categoryData = {};
+
+            csvData.forEach(row => {
+                // Clean numeric values
+                const cost = parseFloat(row['Cost']?.toString().replace(/,/g, '') || 0) || 0;
+                const conversions = parseFloat(row['Conversions']?.toString().replace(/,/g, '') || 0) || 0;
+                const convValue = parseFloat(row['Conv. value']?.toString().replace(/,/g, '') || 0) || 0;
+                const roas = cost > 0 ? convValue / cost : 0;
+
+                // Process by Campaign
+                const campaign = row['Campaign'] || 'Unknown';
+                if (!campaignData[campaign]) {
+                    campaignData[campaign] = { cost: 0, convValue: 0, conversions: 0, roas: 0, records: 0 };
+                }
+                campaignData[campaign].cost += cost;
+                campaignData[campaign].convValue += convValue;
+                campaignData[campaign].conversions += conversions;
+                campaignData[campaign].records += 1;
+
+                // Process by Category
+                const category = row['Category'] || 'Unknown';
+                if (!categoryData[category]) {
+                    categoryData[category] = { cost: 0, convValue: 0, conversions: 0, roas: 0, records: 0 };
+                }
+                categoryData[category].cost += cost;
+                categoryData[category].convValue += convValue;
+                categoryData[category].conversions += conversions;
+                categoryData[category].records += 1;
+            });
+
+            // Calculate ROAS
+            Object.keys(campaignData).forEach(key => {
+                campaignData[key].roas = campaignData[key].cost > 0 ? 
+                    (campaignData[key].convValue / campaignData[key].cost) : 0;
+            });
+            
+            Object.keys(categoryData).forEach(key => {
+                categoryData[key].roas = categoryData[key].cost > 0 ? 
+                    (categoryData[key].convValue / categoryData[key].cost) : 0;
+            });
+
+            // Build category budget input fields
+            buildCategoryBudgetInputs();
+        }
+
+        // ========== BUILD CATEGORY INPUTS ==========
+        function buildCategoryBudgetInputs() {
+            const container = document.getElementById('categoryBudgetInputs');
+            container.innerHTML = '';
+            
+            const totalBudget = Object.values(categoryData).reduce((sum, cat) => sum + cat.cost, 0);
+            
+            Object.keys(categoryData).forEach(category => {
+                const data = categoryData[category];
+                const currentBudget = data.cost;
+                const budgetShare = totalBudget > 0 ? (currentBudget / totalBudget * 100) : 0;
+                
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                div.innerHTML = `
+                    <label>${category}</label>
+                    <small style="display: block; color: var(--text-secondary); margin-bottom: 5px;">
+                        Current: $${currentBudget.toFixed(2)} (${budgetShare.toFixed(1)}%) | ROAS: ${data.roas.toFixed(2)}x
+                    </small>
+                    <input type="number" class="category-budget-input" data-category="${category}" 
+                           value="${currentBudget}" min="0" step="10">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ========== CAMPAIGN ESTIMATES ==========
+        function calculateCampaignEstimates() {
+            const proposedDaily = parseFloat(document.getElementById('proposedDailyBudget').value) || 0;
+            const proposedTotal = proposedDaily * 30; // Assuming 30-day month
+            const currentTotal = Object.values(campaignData).reduce((sum, c) => sum + c.cost, 0);
+            
+            const budgetRatio = currentTotal > 0 ? proposedTotal / currentTotal : 1;
+            
+            const modelType = document.getElementById('modelSelect').value;
+            const modelFunc = getModelFunction(modelType);
+            
+            let html = '<table><thead><tr><th>Campaign</th><th>Current Budget</th><th>New Budget</th><th>Current ROAS</th><th>Expected ROAS</th><th>Current Value</th><th>Expected Value</th><th>Value Lift</th></tr></thead><tbody>';
+            
+            Object.keys(campaignData).sort().forEach(campaign => {
+                const data = campaignData[campaign];
+                const newBudget = data.cost * budgetRatio;
+                const result = modelFunc(data.cost, data.convValue, newBudget, data.roas);
+                const valueLift = data.convValue > 0 ? ((result.convValue - data.convValue) / data.convValue * 100) : 0;
+                
+                html += `<tr>
+                    <td>${campaign}</td>
+                    <td>$${data.cost.toFixed(2)}</td>
+                    <td>$${newBudget.toFixed(2)}</td>
+                    <td>${data.roas.toFixed(2)}x</td>
+                    <td>${result.roas.toFixed(2)}x</td>
+                    <td>$${data.convValue.toFixed(2)}</td>
+                    <td>$${result.convValue.toFixed(2)}</td>
+                    <td style="color: ${valueLift >= 0 ? 'var(--success-color)' : 'var(--danger-color)'};">${valueLift.toFixed(1)}%</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            document.getElementById('campaignResults').innerHTML = html;
+            document.getElementById('campaignResults').style.display = 'block';
+        }
+
+        // ========== CATEGORY ESTIMATES ==========
+        function calculateCategoryEstimates() {
+            const modelType = document.getElementById('modelSelect').value;
+            const modelFunc = getModelFunction(modelType);
+            
+            let html = '<table><thead><tr><th>Category</th><th>Current Budget</th><th>New Budget</th><th>Current ROAS</th><th>Expected ROAS</th><th>Current Value</th><th>Expected Value</th><th>Value Lift</th></tr></thead><tbody>';
+            
+            let totalNewBudget = 0;
+            const inputs = document.querySelectorAll('.category-budget-input');
+            const budgetMap = {};
+            
+            inputs.forEach(input => {
+                const category = input.dataset.category;
+                const newBudget = parseFloat(input.value) || 0;
+                budgetMap[category] = newBudget;
+                totalNewBudget += newBudget;
+            });
+
+            Object.keys(categoryData).sort().forEach(category => {
+                const data = categoryData[category];
+                const newBudget = budgetMap[category] || data.cost;
+                const result = modelFunc(data.cost, data.convValue, newBudget, data.roas);
+                const valueLift = data.convValue > 0 ? ((result.convValue - data.convValue) / data.convValue * 100) : 0;
+                
+                html += `<tr>
+                    <td>${category}</td>
+                    <td>$${data.cost.toFixed(2)}</td>
+                    <td>$${newBudget.toFixed(2)}</td>
+                    <td>${data.roas.toFixed(2)}x</td>
+                    <td>${result.roas.toFixed(2)}x</td>
+                    <td>$${data.convValue.toFixed(2)}</td>
+                    <td>$${result.convValue.toFixed(2)}</td>
+                    <td style="color: ${valueLift >= 0 ? 'var(--success-color)' : 'var(--danger-color)'};">${valueLift.toFixed(1)}%</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            document.getElementById('categoryResults').innerHTML = html;
+            document.getElementById('categoryResults').style.display = 'block';
+            
+            // Show product clustering
+            showProductClustering();
+        }
+
+        // ========== PRODUCT CLUSTERING ==========
+        function showProductClustering() {
+            const clusters = {
+                'high': { label: '⭐ High Performers', products: [], color: '#22c55e' },
+                'medium': { label: '📊 Medium Performers', products: [], color: '#f59e0b' },
+                'low': { label: '⚠️ Low Performers', products: [], color: '#ef4444' }
+            };
+
+            csvData.forEach(row => {
+                const cost = parseFloat(row['Cost']?.toString().replace(/,/g, '') || 0) || 0;
+                const convValue = parseFloat(row['Conv. value']?.toString().replace(/,/g, '') || 0) || 0;
+                const roas = cost > 0 ? convValue / cost : 0;
+                const product = row['Product Title'] || row['Item ID'] || 'Unknown';
+                
+                if (roas >= 1.5) {
+                    clusters.high.products.push({ name: product, roas: roas.toFixed(2), cost: cost.toFixed(2), value: convValue.toFixed(2) });
+                } else if (roas >= 1.0) {
+                    clusters.medium.products.push({ name: product, roas: roas.toFixed(2), cost: cost.toFixed(2), value: convValue.toFixed(2) });
+                } else {
+                    clusters.low.products.push({ name: product, roas: roas.toFixed(2), cost: cost.toFixed(2), value: convValue.toFixed(2) });
+                }
+            });
+
+            let html = '';
+            Object.keys(clusters).forEach(key => {
+                const cluster = clusters[key];
+                html += `<div style="margin-bottom: 30px;">
+                    <h4 style="color: ${cluster.color}; margin-bottom: 15px; font-size: 16px; font-weight: 600;">
+                        ${cluster.label} (${cluster.products.length} products)
+                    </h4>
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr style="background: ${cluster.color}20;">
+                                <th style="color: ${cluster.color};">Product</th>
+                                <th style="color: ${cluster.color};">ROAS</th>
+                                <th style="color: ${cluster.color};">Cost</th>
+                                <th style="color: ${cluster.color};">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                
+                cluster.products.slice(0, 10).forEach(prod => {
+                    html += `<tr>
+                        <td><small>${prod.name}</small></td>
+                        <td>${prod.roas}x</td>
+                        <td>$${prod.cost}</td>
+                        <td>$${prod.value}</td>
+                    </tr>`;
+                });
+                
+                if (cluster.products.length > 10) {
+                    html += `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">... and ${cluster.products.length - 10} more</td></tr>`;
+                }
+                
+                html += '</tbody></table></div>';
+            });
+
+            document.getElementById('productClustering').innerHTML = html;
+            document.getElementById('productClustering').style.display = 'block';
+        }
+
+        // ========== GET MODEL FUNCTION ==========
+        function getModelFunction(modelType) {
+            switch(modelType) {
+                case 'conservative':
+                    return conservativeModel;
+                case 'moderate':
+                    return moderateModel;
+                case 'aggressive':
+                    return aggressiveModel;
+                case 'ml':
+                    return mlInspiredModel;
+                case 'linear':
+                    return linearExtrapolationModel;
+                default:
+                    return moderateModel;
+            }
+        }
+
+        // ========== PERCENTAGE CALCULATOR FUNCTIONS ==========
+        function calculatePercentage() {
+            const num1 = parseFloat(document.getElementById('calc1_num1').value) || 0;
+            const num2 = parseFloat(document.getElementById('calc1_num2').value) || 1;
+            const result = (num1 / num2) * 100;
+            
+            document.getElementById('calc1_result').innerHTML = `
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>${num1} is ${result.toFixed(2)}% of ${num2}</strong>
+                </div>
+            `;
+        }
+
+        function calculatePercentageOfValue() {
+            const percent = parseFloat(document.getElementById('calc2_percent').value) || 0;
+            const num = parseFloat(document.getElementById('calc2_num').value) || 0;
+            const result = (percent / 100) * num;
+            
+            document.getElementById('calc2_result').innerHTML = `
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>${percent}% of ${num} = ${result.toFixed(2)}</strong>
+                </div>
+            `;
+        }
+
+        function calculatePercentageChange() {
+            const original = parseFloat(document.getElementById('calc3_original').value) || 0;
+            const newVal = parseFloat(document.getElementById('calc3_new').value) || 0;
+            const change = newVal - original;
+            const changePercent = (change / original) * 100;
+            const direction = changePercent >= 0 ? 'increase' : 'decrease';
+            
+            document.getElementById('calc3_result').innerHTML = `
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>${Math.abs(changePercent).toFixed(2)}% ${direction}</strong><br>
+                    From ${original} to ${newVal} (Change: ${change >= 0 ? '+' : ''}${change.toFixed(2)})
+                </div>
+            `;
+        }
+
+        function calculateReversePercentage() {
+            const percent = parseFloat(document.getElementById('calc4_percent').value) || 0;
+            const final = parseFloat(document.getElementById('calc4_final').value) || 0;
+            const original = final / (1 + percent / 100);
+            
+            document.getElementById('calc4_result').innerHTML = `
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>Original Value: ${original.toFixed(2)}</strong><br>
+                    ${original.toFixed(2)} + ${percent}% = ${final}
+                </div>
+            `;
+        }
+
+        // ========== Google SHOPPING ADS OPTIMIZER FUNCTIONS ==========
+        const modelDescriptions = {
+            conservative: {
+                description: "🛡️ Conservative Model: Risk-averse approach with lower scaling efficiency (55-75%). Best for uncertain markets, saturated audiences, or risk-averse strategies. Assumes high diminishing returns.",
+                bestFor: "Uncertain markets, saturated audiences, risk-averse strategies"
+            },
+            moderate: {
+                description: "⚖️ Moderate Model: Balanced approach with realistic scaling (65-88%). Best for standard optimizations, tested audiences, and normal market conditions. Moderate diminishing returns.",
+                bestFor: "Standard optimizations, tested audiences, normal conditions"
+            },
+            aggressive: {
+                description: "🚀 Aggressive Model: Optimistic approach with high scaling potential (75-95%). Best for growth campaigns, proven performers, and expanding markets. Low diminishing returns.",
+                bestFor: "Growth campaigns, proven performers, expanding markets"
+            },
+            ml: {
+                description: "🤖 ML-Inspired Model: Adaptive model using performance patterns (55-100%). Best for data-driven decisions, accounts with history, and pattern recognition. Uses sigmoid curves for efficiency.",
+                bestFor: "Data-driven decisions, accounts with history, pattern recognition"
+            },
+            linear: {
+                description: "📏 Linear Extrapolation: Simple proportional scaling (baseline). Best for quick estimates, baseline comparison, and stable campaigns. Assumes constant ROAS.",
+                bestFor: "Quick estimates, baseline comparison, stable campaigns"
+            }
+        };
+
+        function updateModelInfo() {
+            const model = document.getElementById('modelSelect').value;
+            const info = modelDescriptions[model];
+            const infoDiv = document.getElementById('modelInfo');
+            document.getElementById('modelDescription').textContent = info.description;
+            infoDiv.style.display = 'block';
+        }
+
+        function conservativeModel(currentCost, currentConvValue, newBudget, currentROAS) {
+            if (currentCost === 0) return { convValue: 0, roas: 0 };
+            
+            const budgetChange = newBudget - currentCost;
+            if (Math.abs(budgetChange) < 0.01) return { convValue: currentConvValue, roas: currentROAS };
+
+            let baseEfficiency;
+            if (currentROAS >= 1.5) baseEfficiency = 0.75;
+            else if (currentROAS >= 1.0) baseEfficiency = 0.70;
+            else if (currentROAS >= 0.7) baseEfficiency = 0.65;
+            else baseEfficiency = 0.55;
+
+            const budgetChangePct = budgetChange / currentCost;
+            let diminishingFactor;
+            if (budgetChangePct > 0.3) diminishingFactor = 0.75;
+            else if (budgetChangePct > 0.6) diminishingFactor = 0.60;
+            else diminishingFactor = 0.90;
+
+            const finalEfficiency = baseEfficiency * diminishingFactor;
+            
+            let expectedConvValue;
+            if (budgetChange > 0) {
+                const incrementalValue = budgetChange * currentROAS * finalEfficiency;
+                expectedConvValue = currentConvValue + incrementalValue;
+            } else {
+                const budgetRatio = newBudget / currentCost;
+                expectedConvValue = currentConvValue * budgetRatio * 0.95;
+            }
+
+            const expectedROAS = newBudget > 0 ? expectedConvValue / newBudget : 0;
+            return { convValue: expectedConvValue, roas: expectedROAS };
+        }
+
+        function moderateModel(currentCost, currentConvValue, newBudget, currentROAS) {
+            if (currentCost === 0) return { convValue: 0, roas: 0 };
+            
+            const budgetChange = newBudget - currentCost;
+            if (Math.abs(budgetChange) < 0.01) return { convValue: currentConvValue, roas: currentROAS };
+
+            let baseEfficiency;
+            if (currentROAS >= 1.5) baseEfficiency = 0.88;
+            else if (currentROAS >= 1.0) baseEfficiency = 0.83;
+            else if (currentROAS >= 0.7) baseEfficiency = 0.75;
+            else baseEfficiency = 0.65;
+
+            const budgetChangePct = budgetChange / currentCost;
+            let diminishingFactor;
+            if (budgetChangePct > 0.5) diminishingFactor = 0.85;
+            else if (budgetChangePct > 1.0) diminishingFactor = 0.70;
+            else diminishingFactor = 1.0;
+
+            const finalEfficiency = baseEfficiency * diminishingFactor;
+            
+            let expectedConvValue;
+            if (budgetChange > 0) {
+                const incrementalValue = budgetChange * currentROAS * finalEfficiency;
+                expectedConvValue = currentConvValue + incrementalValue;
+            } else {
+                const budgetRatio = newBudget / currentCost;
+                expectedConvValue = currentConvValue * budgetRatio;
+            }
+
+            const expectedROAS = newBudget > 0 ? expectedConvValue / newBudget : 0;
+            return { convValue: expectedConvValue, roas: expectedROAS };
+        }
+
+        function aggressiveModel(currentCost, currentConvValue, newBudget, currentROAS) {
+            if (currentCost === 0) return { convValue: 0, roas: 0 };
+            
+            const budgetChange = newBudget - currentCost;
+            if (Math.abs(budgetChange) < 0.01) return { convValue: currentConvValue, roas: currentROAS };
+
+            let baseEfficiency;
+            if (currentROAS >= 1.5) baseEfficiency = 0.95;
+            else if (currentROAS >= 1.0) baseEfficiency = 0.90;
+            else if (currentROAS >= 0.7) baseEfficiency = 0.85;
+            else baseEfficiency = 0.75;
+
+            const budgetChangePct = budgetChange / currentCost;
+            let diminishingFactor;
+            if (budgetChangePct > 1.0) diminishingFactor = 0.90;
+            else if (budgetChangePct > 2.0) diminishingFactor = 0.80;
+            else diminishingFactor = 1.0;
+
+            const finalEfficiency = baseEfficiency * diminishingFactor;
+            
+            let expectedConvValue;
+            if (budgetChange > 0) {
+                const incrementalValue = budgetChange * currentROAS * finalEfficiency;
+                expectedConvValue = currentConvValue + incrementalValue;
+            } else {
+                const budgetRatio = newBudget / currentCost;
+                expectedConvValue = currentConvValue * budgetRatio * 1.02;
+            }
+
+            const expectedROAS = newBudget > 0 ? expectedConvValue / newBudget : 0;
+            return { convValue: expectedConvValue, roas: expectedROAS };
+        }
+
+        function mlInspiredModel(currentCost, currentConvValue, newBudget, currentROAS) {
+            if (currentCost === 0) return { convValue: 0, roas: 0 };
+            
+            const budgetChange = newBudget - currentCost;
+            if (Math.abs(budgetChange) < 0.01) return { convValue: currentConvValue, roas: currentROAS };
+
+            const budgetChangePct = budgetChange / currentCost;
+            
+            let performanceScore;
+            if (currentROAS >= 2.0) performanceScore = 1.0;
+            else if (currentROAS >= 1.5) performanceScore = 0.92;
+            else if (currentROAS >= 1.0) performanceScore = 0.85;
+            else if (currentROAS >= 0.7) performanceScore = 0.75;
+            else if (currentROAS >= 0.5) performanceScore = 0.65;
+            else performanceScore = 0.55;
+
+            let baseEfficiency;
+            if (budgetChangePct > 0) {
+                const efficiencyFactor = 1 / (1 + Math.exp(budgetChangePct - 0.7)) * 0.3 + 0.7;
+                baseEfficiency = performanceScore * efficiencyFactor;
+            } else {
+                baseEfficiency = Math.min(1.0, performanceScore * 1.05);
+            }
+
+            let expectedConvValue;
+            if (budgetChange > 0) {
+                const incrementalValue = budgetChange * currentROAS * baseEfficiency;
+                expectedConvValue = currentConvValue + incrementalValue;
+            } else {
+                const budgetRatio = newBudget / currentCost;
+                expectedConvValue = currentConvValue * budgetRatio * baseEfficiency;
+            }
+
+            const expectedROAS = newBudget > 0 ? expectedConvValue / newBudget : 0;
+            return { convValue: expectedConvValue, roas: expectedROAS };
+        }
+
+        function linearExtrapolationModel(currentCost, currentConvValue, newBudget, currentROAS) {
+            if (currentCost === 0) return { convValue: 0, roas: 0 };
+            
+            if (Math.abs(newBudget - currentCost) < 0.01) {
+                return { convValue: currentConvValue, roas: currentROAS };
+            }
+
+            const budgetRatio = newBudget / currentCost;
+            const expectedConvValue = currentConvValue * budgetRatio;
+            return { convValue: expectedConvValue, roas: currentROAS };
+        }
+
+        function calculateOptimizerResults() {
+            const currentBudget = parseFloat(document.getElementById('currentBudget').value) || 0;
+            const currentConvValue = parseFloat(document.getElementById('currentConvValue').value) || 0;
+            const newBudget = parseFloat(document.getElementById('newBudget').value) || 0;
+            const numDays = parseFloat(document.getElementById('numDays').value) || 30;
+            const modelType = document.getElementById('modelSelect').value;
+
+            if (currentBudget <= 0 || currentConvValue <= 0 || newBudget <= 0) {
+                alert('Please enter valid positive numbers for all fields');
+                return;
+            }
+
+            // Calculate current ROAS
+            const currentROAS = currentConvValue / currentBudget;
+
+            // Select model function
+            let modelFunc;
+            switch(modelType) {
+                case 'conservative':
+                    modelFunc = conservativeModel;
+                    break;
+                case 'moderate':
+                    modelFunc = moderateModel;
+                    break;
+                case 'aggressive':
+                    modelFunc = aggressiveModel;
+                    break;
+                case 'ml':
+                    modelFunc = mlInspiredModel;
+                    break;
+                case 'linear':
+                    modelFunc = linearExtrapolationModel;
+                    break;
+                default:
+                    modelFunc = moderateModel;
+            }
+
+            // Calculate expected performance
+            const result = modelFunc(currentBudget, currentConvValue, newBudget, currentROAS);
+            const expectedConvValue = result.convValue;
+            const expectedROAS = result.roas;
+
+            // Calculate daily budgets
+            const currentDaily = currentBudget / numDays;
+            const newDaily = newBudget / numDays;
+
+            // Calculate value change
+            const valueDelta = expectedConvValue - currentConvValue;
+            const valueLift = (valueDelta / currentConvValue) * 100;
+            const budgetDelta = newBudget - currentBudget;
+            const roasDelta = expectedROAS - currentROAS;
+
+            // Update results display
+            document.getElementById('currentROAS').textContent = currentROAS.toFixed(2) + 'x';
+            document.getElementById('expectedROAS').textContent = expectedROAS.toFixed(2) + 'x';
+            document.getElementById('currentDaily').textContent = '$' + currentDaily.toFixed(0);
+            document.getElementById('newDaily').textContent = '$' + newDaily.toFixed(0);
+            document.getElementById('expectedValue').textContent = '$' + expectedConvValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('valueDelta').textContent = (valueDelta >= 0 ? '+' : '') + '$' + valueDelta.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('valueLift').textContent = valueLift.toFixed(1) + '%';
+
+            // Update table
+            document.getElementById('table_currBudget').textContent = '$' + currentBudget.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('table_newBudget').textContent = '$' + newBudget.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('table_budgetChange').textContent = (budgetDelta >= 0 ? '+' : '') + '$' + budgetDelta.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+            document.getElementById('table_currDaily').textContent = '$' + currentDaily.toFixed(0);
+            document.getElementById('table_newDaily').textContent = '$' + newDaily.toFixed(0);
+            document.getElementById('table_dailyChange').textContent = (newDaily - currentDaily >= 0 ? '+' : '') + '$' + (newDaily - currentDaily).toFixed(0);
+
+            document.getElementById('table_currValue').textContent = '$' + currentConvValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('table_expectedValue').textContent = '$' + expectedConvValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            document.getElementById('table_valueChange').textContent = (valueDelta >= 0 ? '+' : '') + '$' + valueDelta.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+            document.getElementById('table_currROAS').textContent = currentROAS.toFixed(2) + 'x';
+            document.getElementById('table_expectedROAS').textContent = expectedROAS.toFixed(2) + 'x';
+            document.getElementById('table_roasChange').textContent = (roasDelta >= 0 ? '+' : '') + roasDelta.toFixed(2) + 'x';
+
+            // Show results
+            document.getElementById('optimizerResults').style.display = 'block';
+
+            // Scroll to results
+            document.getElementById('optimizerResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize model info on page load
+        updateModelInfo();
+
+        // Sample CSV Data for Testing
+        function loadSampleData() {
+            const sampleCSV = `Campaign,Product Title,Category,Impressions,Clicks,Cost,Conversions,Conv. value,CTR,Conv. rate,ROAS
+Campaign 1,Laptop Pro 15,Electronics,5000,250,1000,15,2250,5%,6%,2.25
+Campaign 1,Gaming Mouse,Electronics,3000,180,600,12,1800,6%,6.67%,3.00
+Campaign 1,USB Cable,Electronics,2000,150,300,18,450,7.5%,12%,1.50
+Campaign 2,Office Chair,Furniture,4000,200,800,10,1200,5%,5%,1.50
+Campaign 2,Desk Lamp,Furniture,2500,100,500,8,800,4%,8%,1.60
+Campaign 2,Standing Desk,Furniture,1500,75,450,6,900,5%,8%,2.00
+Campaign 3,Summer Dress,Fashion,6000,300,900,18,1800,5%,6%,2.00
+Campaign 3,Winter Coat,Fashion,3500,140,700,7,840,4%,5%,1.20
+Campaign 3,Casual T-Shirt,Fashion,4000,200,400,16,400,5%,8%,1.00`;
+
+            document.getElementById('csvFile').value = '';
+            Papa.parse(sampleCSV, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    csvData = results.data;
+                    processCSVData();
+                    
+                    const statusDiv = document.getElementById('uploadStatus');
+                    statusDiv.innerHTML = `
+                        <div class="alert alert-success">
+                            ✅ Loaded sample data: ${csvData.length} products across multiple campaigns and categories
+                        </div>
+                    `;
+                    
+                    document.getElementById('csvSection').style.display = 'block';
+                    document.getElementById('manualSection').style.display = 'none';
+                }
+            });
+        }
+
+        // Auto-load sample data on optimizer page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there's a test button needed
+            const optimizerPage = document.getElementById('optimizer');
+            if (optimizerPage) {
+                const button = document.createElement('button');
+                button.className = 'btn-secondary';
+                button.innerHTML = '📋 Load Sample Data (for testing)';
+                button.style.marginBottom = '20px';
+                button.onclick = loadSampleData;
+                optimizerPage.querySelector('.card').insertBefore(button, optimizerPage.querySelector('h3'));
+            }
+        });
     </script>
 </body>
 </html>
