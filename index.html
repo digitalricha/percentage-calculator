@@ -7,16 +7,16 @@
     <meta name="description" content="Use our free Analytics tools to review the performance of your Google Ads Shopping Ads, budget estimator or percentage calculator. Privacy and AI safe">
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="noodp">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5653816698002015"
-        crossorigin="anonymous"></script>
-    <style>
-    <!-- Google Tag Manager -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5653816698002015"
+     crossorigin="anonymous"></script>
+         <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-W4B8PS26');</script>
-<!-- End Google Tag Manager --> 
+<!-- End Google Tag Manager -->    
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -312,25 +312,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: var(--light-bg);
         }
 
-        /* AdSense Section */
-        .adsense-section {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .adsense-placeholder {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
         /* Success/Error Messages */
         .alert {
             padding: 16px;
@@ -417,13 +398,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- AdSense Section (Visible on All Pages) -->
-        <div class="adsense-section">
-            <div class="adsense-placeholder">
-                📺 AdSense/Advertisement Space<br>
-                <small>Your ads display here</small>
-            </div>
-        </div>
 
         <!-- Page 1: Percentage Calculator -->
         <div id="calculator" class="page active">
@@ -505,7 +479,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="form-group">
                     <label>Upload Google Shopping Ads Data fom Google Ads Account in CSV Format</label>
                     <input type="file" id="csvFile" accept=".csv" onchange="loadCSVData()">
-                    <small style="color: var(--text-secondary); display: block; margin-top: 8px;">Upload your Google Shopping CSV export with columns: Campaign, Product Title, Category, Impressions, Clicks, Cost, Conversions, Conv. value, CTR, Conv. rate, All Conv. value/Cost </small>
+                    <small style="color: var(--text-secondary); display: block; margin-top: 8px;">Download the data from your Google Ads account and Upload your Google Shopping CSV export with columns: Campaign, Product Title, Category, Impressions, Clicks, Cost, Conversions, Conv. value, CTR, Conv. rate, All Conv. value/Cost. </small>
                 </div>
 
                 <div id="uploadStatus"></div>
